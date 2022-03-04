@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <h1 href="#"><a href="/">Музыкальная станция</a></h1>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="{% url 'application:home' %}">Главная</a></li>
+                            <li><a href="{% url 'application:genre' %}">Жанры</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- ##### Featured Artist Area Start ##### -->
+    <section class="featured-artist-area section-padding-100 bg-img bg-overlay bg-fixed" style="background-image: url('/static/img/djeba.jpg');">
+        <div class="container">
+        	{% for iart in artest %}
+            <div class="row align-items-end">
+                <div class="col-12 col-md-5 col-lg-4">
+                    <div class="featured-artist-thumb">
+                        <img src="{{ iart.image.url }}" alt="" style="min-height:auto;min-width:auto;">
+                    </div>
+                </div>
+                <div class="col-12 col-md-7 col-lg-8">
+                    <div class="featured-artist-content">
+                        <!-- Section Heading -->
+                        <div class="section-heading white text-left mb-30">
+                            <p>{{ iart.genre.name }}</p>
+                            <h2>{{ iart.name }}</h2>
+                    {% for names in iart.members.all %}
+                    <br>
+                            <h2>{{ names.name }}</h2>
+                    {% endfor %}
+                        </div>
+                        <p>{{ iart.desc }}</p>
+                        {% for item_track in track_one %}
+                        <div class="song-play-area">
+                            <div class="song-name">
+                                <p><a href="{{ item_track.get_absolute_url }}">{{ item_track.name }}</a></p>
+                            </div>
+                            <div class="audioplayer"><audio preload="auto" controls>
+                                <source src="{{ item_track.music_upload.url }}">
+                            </audio><div class="audioplayer-playpause" title=""><a href="#"></a></div><div class="audioplayer-volume"><div class="audioplayer-volume-button" title=""><a href="#"></a></div><div class="audioplayer-volume-adjust"><div><div style="width: 100%;"></div></div></div></div></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- ##### Featured Artist Area End ##### -->
+
+	
+	<!-- ##### Song Area Start ##### -->
+    <div class="one-music-songs-area">
+        <div class="container">
+            <div class="row">
+            	{% for tracker in track %}
+                <!-- Single Song Area -->
+                <div class="col-12">
+                    <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                        <div class="song-thumbnail">
+                            <img src="{{ tracker.image_track.url }}" alt="">
+                        </div>
+                        <div class="song-play-area">
+                            <div class="song-name">
+                                <p><a href="{{ tracker.get_absolute_url }}">{{ tracker.name }}</a></p>
+                            </div>
+                            <audio preload="auto" controls>
+                                <source src="{{ tracker.music_upload.url }}">
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                	<a href="{% url 'application:all_tracks' artists.slug %}">ПОКАЗАТЬ ВСЕ ТРЕКИ исполнителя "{{ artists.name }}"</a>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Song Area End ##### -->
+
+
+    <!-- ##### Latest Albums Area Start ##### -->
+    <section class="latest-albums-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading style-2">
+                        <p>что нового</p>
+                        <h2>Популярные альбомы</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9">
+                    <div class="ablums-text text-center mb-70">
+                        <p>Nam tristique ex vel magna tincidunt, ut porta nisl finibus. Vivamus eu dolor eu quam varius rutrum. Fusce nec justo id sem aliquam fringilla nec non lacus. Suspendisse eget lobortis nisi, ac cursus odio. Vivamus nibh velit, rutrum at ipsum ac, dignissim iaculis ante. Donec in velit non elit pulvinar pellentesque et non eros.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="albums-slideshow owl-carousel">
+                        {% for album in albums %}
+                        <!-- Single Album -->
+                        <div class="single-album">
+                            <img src="{{ album.image.url }}" alt="">
+                            <div class="album-info">
+                                <a href="{{ album.get_absolute_url }}">
+                                    <h5>{{ album.name }}</h5>
+                                </a>
+                                <p>{{ album.author.name }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Latest Albums Area End ##### -->
+
+
+
+    <!-- ##### Buy Now Area Start ##### -->
+    <section class="oneMusic-buy-now-area has-fluid bg-gray section-padding-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading style-2">
+                        
+                        <h2>Еще исполнители</h2>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                	{% for sim_post in similar_artist %}
+                <!-- Single Album Area -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
+                        <div class="album-thumb">
+                            <img src="{{ sim_post.image.url }}" alt="">
+                            <!-- Album Price -->
+                            <div class="album-price">
+                                <p>$1999.90</p>
+                            </div>
+                            <!-- Play Icon -->
+                            <div class="play-icon">
+                                <a href="#" class="video--play--btn"><span class="icon-play-button"></span></a>
+                            </div>
+                        </div>
+                        <div class="album-info">
+                            <a href="#">
+                                <h5><a href="{{ sim_post.get_absolute_url }}">{{ sim_post.name }}</a></h5>
+                            </a>
+                            <p>{{ sim_post.genre.name }}</p>
+                        </div>
+                    </div>
+                </div>
+                    {% endfor %}
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="load-more-btn text-center wow fadeInUp" data-wow-delay="300ms">
+                        <a href="#" class="btn oneMusic-btn">Load More <i class="fa fa-angle-double-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <h1 href="#"><a href="/">Музыкальная станция</a></h1>
+                    <p class="copywrite-text">
+                      <a href="#">
+                      Авторские права &copy;
+                      <script>document.write(new Date().getFullYear());</script> Все права защищены |  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://vk.com/iceiceicenice" target="_blank">KORSH</a>
+                      </p>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="{% url 'application:home' %}">Главная</a></li>
+                            <li><a href="{% url 'application:genre' %}">Жанры</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+</html>
