@@ -124,7 +124,7 @@
                     <div class="content">
                       <ul>
                       	{% for recent_post in rec_post %}
-                        <li><a href="post-details.html">
+                        <li><a href="{{ recent_post.get_absolute_url }}">
                           <h5>{{ recent_post.title }}</h5>
                           <span>{{ recent_post.publish|naturaltime }}</span>
                         </a></li>
