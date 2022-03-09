@@ -79,9 +79,9 @@
                       <span>{{ pos.type_blog }}</span>
                       <a href="{{ pos.get_absolute_url }}"><h4>{{ pos.title }}</h4></a>
                       <ul class="post-info">
-                        <li><a href="#">{{ pos.author }}</a></li>
-                        <li><a href="#">{{ pos.publish|naturaltime }}</a></li>
-                        <li><a href="#">12 Comments</a></li>
+                        <li><a href="{{ pos.get_absolute_url }}">{{ pos.author }}</a></li>
+                        <li><a href="{{ pos.get_absolute_url }}">{{ pos.publish|naturaltime }}</a></li>
+                        <li><a href="{{ pos.get_absolute_url }}">{{ pos.comments.count }} коментари</a></li>
                       </ul>
                       <p>{{ pos.pre_body }}</p>
                       <div class="post-options">
@@ -149,7 +149,7 @@
                     <div class="content">
                       <ul>
                       	{% for category in categories %}
-                        <li><a href="#">- {{ category.cat_name }}</a></li>
+                        <li><a href="{% url 'application:category_detail' category.slug %}">- {{ category.cat_name }}</a></li>
                         {% endfor %}
                         <!--<li><a href="#">- Awesome Layouts</a></li>
                         <li><a href="#">- Creative Ideas</a></li>

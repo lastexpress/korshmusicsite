@@ -78,7 +78,7 @@
                 <ul class="post-info">
                   <li><a href="#">{{ i.author }}</a></li>
                   <li><a href="#">{{ i.publish|naturaltime }}</a></li>
-                  <li><a href="#">12 Comments</a></li>
+                  <li><a href="#">{{ i.comments.count }} комментари</a></li>
                 </ul>
               </div>
             </div>
@@ -208,9 +208,9 @@
                       <span>{{ post_obj.type_blog }}</span>
                       <a href="{{ post_obj.get_absolute_url }}"><h4>{{ post_obj.title }}</h4></a>
                       <ul class="post-info">
-                        <li><a href="#">{{ post_obj.author }}</a></li>
-                        <li><a href="#">{{ post_obj.publish|naturaltime }}</a></li>
-                        <li><a href="#">12 Comments</a></li>
+                        <li><a href="{{ post_obj.get_absolute_url }}">{{ post_obj.author }}</a></li>
+                        <li><a href="{{ post_obj.get_absolute_url }}">{{ post_obj.publish|naturaltime }}</a></li>
+                        <li><a href="{{ post_obj.get_absolute_url }}">{{ post_obj.comments.count }} коментари</a></li>
                       </ul>
                       <p>{{ post_obj.pre_body }}</p>
                       <div class="post-options">

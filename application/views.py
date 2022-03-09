@@ -176,7 +176,7 @@ def blog_list(request):
 
 	posts = Blog.published.all()[:5]
 
-	rec_post = Blog.published.all()[:3]
+	rec_post = Blog.published.all()[:4]
 
 	categories = CategoryList.objects.all()
 
@@ -190,7 +190,7 @@ def blog_list(request):
 def blog_all_post(request):
 	posts = Blog.published.all()
 
-	recent_post = Blog.published.all()[:3]
+	recent_post = Blog.published.all()[:4]
 
 	categories = CategoryList.objects.all()
 
@@ -253,7 +253,7 @@ def blog_detail(request, year, month, day, post):
 								   publish__month=month,
 								   publish__day=day)
 
-	recent_post = Blog.published.all()[:3]
+	recent_post = Blog.published.all()[:4]
 
 	categories = CategoryList.objects.all()
 
