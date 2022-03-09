@@ -1,0 +1,12 @@
+{% extends 'blog/index.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block blog_all_post %}
+
+{% include 'blog/blog_all_post.html' %}
+
+{% include 'blog/pagination.html' with page=posts %}
+
+
+{% endblock %}

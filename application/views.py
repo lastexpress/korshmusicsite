@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
@@ -10,6 +11,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from .models import Genre, Artist, Album, SingleMusic, Member, MediaType, Comment, AnswerComment, PostReview, ChangeContactPage
 from .forms import CommentForm, PostReviewForm
+from blog.forms import CommentBlogForm
+from blog.models import CategoryList, Blog, CommentBlog
 
 
 
@@ -107,10 +110,10 @@ def SingleTrackDetail(request, name):
 			new_comment = comment_form.save(commit=False)
 			new_comment.parrent = track
 			new_comment.save()
-			return HttpResponseRedirect(request.path)
-		
+			return HttpResponseRedirect(request.path)	
 	else:
 		comment_form = CommentForm()
+
 
 	dic_obj = {'track' : track,
 			   'tracks' : tracks,
@@ -166,3 +169,109 @@ def contact_page(request):
 
 
 	return render(request, 'contact.html', dic_obj)
+
+
+def blog_list(request):
+	post = Blog.published.all()
+
+	posts = Blog.published.all()[:5]
+
+	rec_post = Blog.published.all()[:3]
+
+	categories = CategoryList.objects.all()
+
+	dic_obj = {'post' : post, 'posts' : posts,
+			   'rec_post' : rec_post,
+			   'categories' : categories}
+
+	return render(request, 'blog/blog_list.html', dic_obj)
+
+
+def blog_all_post(request):
+	posts = Blog.published.all()
+
+	recent_post = Blog.published.all()[:3]
+
+	categories = CategoryList.objects.all()
+
+	#paginations
+	objects_list = Blog.published.all()
+	paginator = Paginator(objects_list, 10)
+	page = request.GET.get('page')
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		posts = paginator.page(paginator.num_pages)
+
+
+	dic_obj = {'posts' : posts,
+			   'recent_post' : recent_post,
+			   'categories' : categories}
+
+	return render(request, 'blog/main.html', dic_obj)
+
+
+def category_detail(request, cat):
+	category = get_object_or_404(CategoryList, slug=cat)
+
+	post = Blog.published.filter(category_id=category)
+
+	rec_post = Blog.published.filter(category_id=category)[:4]
+
+	categories = CategoryList.objects.all()
+
+	#PAGINATIONS
+	objects_list = Blog.published.filter(category_id=category)
+	paginator = Paginator(objects_list, 4)
+	page = request.GET.get('page')
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		posts = paginator.page(paginator.num_pages)
+
+
+
+	dic_obj = {'category' : category,
+			   'post' : post,
+			   'rec_post' : rec_post,
+			   'categories' : categories,
+			   'page' : page,
+			   'posts' : posts,
+			   'objects_list' : objects_list}
+
+	return render(request, 'category/main.html', dic_obj)
+
+
+def blog_detail(request, year, month, day, post):
+	post = get_object_or_404(Blog, slug=post,
+								   status='published',
+								   publish__year=year,
+								   publish__month=month,
+								   publish__day=day)
+
+	recent_post = Blog.published.all()[:3]
+
+	categories = CategoryList.objects.all()
+
+	new_comment = None
+
+	if request.method == 'POST':
+		comment_forms = CommentBlogForm(data=request.POST)
+		if comment_forms.is_valid():
+			new_comment = comment_forms.save(commit=False)
+			new_comment.post = post
+			new_comment.save()
+			return HttpResponseRedirect(request.path)	
+	else:
+		comment_forms = CommentBlogForm()
+
+	dic_obj = {'post' : post,
+			   'recent_post' : recent_post,
+			   'categories' : categories,
+			   'comment_forms' : comment_forms}
+
+	return render(request, 'blog/blog_detail.html', dic_obj)

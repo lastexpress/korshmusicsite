@@ -24,7 +24,7 @@
         webvisor:true
    });
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/87717780" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87717780" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
@@ -42,7 +42,7 @@
                             <li><a href="{% url 'application:home' %}">Главная</a></li>
                             <li><a href="{% url 'application:genre' %}">Жанры</a></li>
                             <li><a href="#">Events</a></li>
-                            <li><a href="#">News</a></li>
+                            <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
                             <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
                         </ul>
                     </div>
@@ -284,7 +284,7 @@
                             <li><a href="{% url 'application:home' %}">Главная</a></li>
                             <li><a href="{% url 'application:genre' %}">Жанры</a></li>
                             <li><a href="#">Events</a></li>
-                            <li><a href="#">News</a></li>
+                            <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
                             <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
                         </ul>
                     </div>
@@ -336,6 +336,5 @@
           }
       })
     </script>
-
 </body>
 </html>

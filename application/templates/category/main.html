@@ -1,0 +1,12 @@
+{% extends 'category/base_cat_detail.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block category_detail %}
+
+{% include 'category/category_detail.html' %}
+
+{% include 'category/pagination.html' with page=posts %}
+
+
+{% endblock %}

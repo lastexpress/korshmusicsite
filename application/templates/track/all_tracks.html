@@ -84,7 +84,7 @@ a:hover,a:focus{
                             <li><a href="{% url 'application:home' %}">Главная</a></li>
                             <li><a href="{% url 'application:genre' %}">Жанры</a></li>
                             <li><a href="#">Events</a></li>
-                            <li><a href="#">News</a></li>
+                            <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
                             <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
                         </ul>
                     </div>
@@ -164,6 +164,7 @@ a:hover,a:focus{
 
 
 
+    <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
@@ -182,7 +183,7 @@ a:hover,a:focus{
                             <li><a href="{% url 'application:home' %}">Главная</a></li>
                             <li><a href="{% url 'application:genre' %}">Жанры</a></li>
                             <li><a href="#">Events</a></li>
-                            <li><a href="#">News</a></li>
+                            <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
                             <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
                         </ul>
                     </div>

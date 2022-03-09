@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'application',
+    'application.apps.ApplicationConfig',
+    'blog.apps.BlogConfig',
     'phonenumber_field',
 ]
 
