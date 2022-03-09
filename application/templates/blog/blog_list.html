@@ -76,9 +76,9 @@
                 </div>
                 <a href="{{ i.get_absolute_url }}"><h4>{{ i.title }}</h4></a>
                 <ul class="post-info">
-                  <li><a href="#">{{ i.author }}</a></li>
-                  <li><a href="#">{{ i.publish|naturaltime }}</a></li>
-                  <li><a href="#">{{ i.comments.count }} комментари</a></li>
+                  <li><a href="{{ i.get_absolute_url }}">{{ i.author }}</a></li>
+                  <li><a href="{{ i.get_absolute_url }}">{{ i.publish|naturaltime }}</a></li>
+                  <li><a href="{{ i.get_absolute_url }}">{{ i.comments.count }} комментари</a></li>
                 </ul>
               </div>
             </div>
