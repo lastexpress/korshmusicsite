@@ -101,7 +101,7 @@
 					</div>
 			{% else %}
 					<div class="panel-body comments">
-						<form action="/" method="post">
+						<form action="" method="post">
 							{% csrf_token %}
 							{{ comment_form.as_p }}
 							
