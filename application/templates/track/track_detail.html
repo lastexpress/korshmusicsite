@@ -115,11 +115,11 @@
 							<li class="media">
 		{% for com in comments %}
 								<div class="comment">
-									{% if com.profile_image %}
+									
 									<a href="#" class="pull-left">
-										<img src="{{com.profile_image.url.id}}" alt="" class="img-circle" style="width:50px;height:50px;">
+										<img src="{% static 'img/python.svg' %}" alt="" class="img-circle" style="width:50px;height:50px;">
 									</a>
-									{% endif %}
+									
 									<div class="media-body">
 										<strong class="text-success">{{ com.comment_name }}</strong>
 										<span class="text-muted">
@@ -148,7 +148,9 @@
 									<li class="media">
 										<div class="comment">
 											<a href="#" class="pull-left">
+												{% if ans_com.profile_image %}
 												<img src="{{ans_com.profile_image.url}}" alt="" class="img-circle" style="width:50px;height:50px;">
+												{% endif %}
 											</a>
 											<div class="media-body">
 												<strong class="text-success">{{ ans_com.comment_name }}</strong>
