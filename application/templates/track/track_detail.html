@@ -92,9 +92,10 @@
 			{% if not track.comments.all %}
 						<h1>Нет комментариев! добавьте первый</h1>
 						Комментарии
-						<form action="" method="post">
+						<form action="" method="post" enctype="multipart/form-data">
 							{% csrf_token %}
 							{{ comment_form.as_p }}
+							{{ comment_form.text }}
 							<p><input type="submit" value="Add comment" class="btn btn-info pull-right"></p>
 						</form>
 						<div class="clearfix"></div></div>
@@ -104,20 +105,21 @@
 						<form action="" method="post">
 							{% csrf_token %}
 							{{ comment_form.as_p }}
-							
 							<a class="small pull-left" href="#">Войти или зарегистрироваться</a>
 							<div class="clearfix"></div>
-							<p><input type="submit" value="Add comment" class="btn btn-info pull-right"></p>
+							<p><input name="parent" type="submit" value="Отправить" class="btn btn-info pull-right"></p>
 						</form>
 						<br>
 						<hr>
 						<ul class="media-list">
 							<li class="media">
-		{% for com in track.comments.all %}
+		{% for com in comments %}
 								<div class="comment">
+									{% if com.profile_image %}
 									<a href="#" class="pull-left">
-										<img src="#" alt="" class="img-circle" style="width:50px;height:50px;">
+										<img src="{{com.profile_image.url.id}}" alt="" class="img-circle" style="width:50px;height:50px;">
 									</a>
+									{% endif %}
 									<div class="media-body">
 										<strong class="text-success">{{ com.comment_name }}</strong>
 										<span class="text-muted">
@@ -125,14 +127,28 @@
 										</span>
 										<p>{{ com.comment_body }}</p>
 									</div>
+										  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#replyBox{{com.id}}" aria-expanded="false" aria-controls="replyBox{{com.id}}">
+										    Ответить
+										  </button>
+										<div class="collapse" id="replyBox{{com.id}}">
+										  <div class="card card-body my-2">
+										    <form action="" method="post" enctype="multipart/form-data">
+										    	{% csrf_token %}
+										    	{{comment_form.as_p}}
+										    	<input type="hidden" name='reply_id' value="{{com.id}}">
+										    	<p><input name="answer" type="submit" value="Отправить" class="btn btn-primary"></p>
+										    </form>
+										  </div>
+										</div>
+									
 									<div class="clearfix"></div>
 								</div>
-								{% for ans_com in com.answer.all %}
+								{% for ans_com in com.replies.all %}
 								<ul class="media-list">
 									<li class="media">
 										<div class="comment">
 											<a href="#" class="pull-left">
-												<img src="{{ ans_com.profile_image.url }}" alt="" class="img-circle" style="width:50px;height:50px;">
+												<img src="{{ans_com.profile_image.url}}" alt="" class="img-circle" style="width:50px;height:50px;">
 											</a>
 											<div class="media-body">
 												<strong class="text-success">{{ ans_com.comment_name }}</strong>
@@ -177,7 +193,6 @@
 {% endif %}
 
 
-
 	<!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
         <div class="containers">
@@ -213,10 +228,8 @@
 
 
 
-
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 </body>
 </html>

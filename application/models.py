@@ -111,10 +111,11 @@ class SingleMusic(models.Model):
 
 class Comment(models.Model):
 	parrent = models.ForeignKey(SingleMusic, on_delete=models.CASCADE, verbose_name='Трэк', related_name='comments', null=True)
+	reply = models.ForeignKey("Comment", related_name="replies", on_delete=models.SET_NULL, blank=True, null=True)
 	comment_name = models.CharField(max_length=200, verbose_name='Имя комментатора')
 	comment_body = models.TextField(verbose_name='Текст комментария')
 	date_added = models.DateTimeField(auto_now_add=True, verbose_name='Время создания комментария')
-	profile_image = models.ImageField(upload_to='comment_image_prof/', null=True, verbose_name='Картинка профиля')
+	profile_image = models.ImageField(upload_to='comment_image_prof/', null=True, blank=True, verbose_name='Картинка профиля')
 
 	def __str__(self):
 		return f"{self.comment_body} | {self.comment_name}"
@@ -122,21 +123,6 @@ class Comment(models.Model):
 	class Meta:
 		verbose_name = 'Комментарий'
 		verbose_name_plural = 'Комментарии'
-
-
-class AnswerComment(models.Model):
-	parrent = models.ForeignKey(Comment, on_delete=models.CASCADE, verbose_name='Ответ на коммент', related_name='answer')
-	comment_name = models.CharField(max_length=200, verbose_name='Имя комментатора')
-	comment_body = models.TextField(verbose_name='Текст комментария')
-	date_added = models.DateTimeField(auto_now_add=True, verbose_name='Время создания комментария')
-	profile_image = models.ImageField(upload_to='comment_image_prof/', verbose_name='Картинка профиля')
-
-	def __str__(self):
-		return f"{self.parrent.comment_name} | {self.comment_name}"
-
-	class Meta:
-		verbose_name = 'Ответ на комментарий'
-		verbose_name_plural = verbose_name
 
 
 class PostReview(models.Model):

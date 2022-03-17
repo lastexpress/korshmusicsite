@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Genre, Artist, Album, MediaType, Member, SingleMusic, Comment, AnswerComment, PostReview, ChangeContactPage
+from .models import Genre, Artist, Album, MediaType, Member, SingleMusic, Comment, PostReview, ChangeContactPage
 
 
 @admin.register(Genre)
@@ -34,10 +34,6 @@ class SingleMusicAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
 	list_display = ('comment_name', 'parrent')
 
-
-@admin.register(AnswerComment)
-class AnswerCommentAdmin(admin.ModelAdmin):
-	list_display = ('comment_name', 'parrent')
 
 @admin.register(PostReview)
 class PostReviewAdmin(admin.ModelAdmin):

@@ -5,11 +5,13 @@ from .models import Comment, PostReview
 class CommentForm(forms.ModelForm):
 	class Meta:
 		model = Comment
-		fields = ('comment_name', 'comment_body')
+		fields = ('comment_name', 'comment_body', 'profile_image')
 		widgets = {
 			'comment_name' : forms.TextInput(attrs={'class':'form-control'}),
 			'comment_body' : forms.Textarea(attrs={'class':'form-control'}),
+			'profile_image' : forms.FileInput()
 		}
+
 
 class PostReviewForm(forms.ModelForm):
 	class Meta:

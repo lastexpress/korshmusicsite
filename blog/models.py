@@ -54,6 +54,7 @@ class Blog(models.Model):
 
 class CommentBlog(models.Model):
 	post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+	parent = models.ForeignKey("self", on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.CharField(max_length=255, verbose_name='Имя комментатора')
 	email = models.EmailField()
 	subject = models.CharField(max_length=255, verbose_name='Тема комментария')

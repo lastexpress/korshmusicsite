@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
-from .models import Genre, Artist, Album, SingleMusic, Member, MediaType, Comment, AnswerComment, PostReview, ChangeContactPage
+from .models import Genre, Artist, Album, SingleMusic, Member, MediaType, Comment, PostReview, ChangeContactPage
 from .forms import CommentForm, PostReviewForm
 from blog.forms import CommentBlogForm
 from blog.models import CategoryList, Blog, CommentBlog
@@ -102,22 +102,40 @@ def SingleTrackDetail(request, name):
 
 	tracks = SingleMusic.objects.filter(slug=name)
 
+	comments = track.comments.filter(reply__isnull=True)
+
+	pk = None
 	new_comment = None
 
 	if request.method == 'POST':
-		comment_form = CommentForm(data=request.POST)
+		comment_form = CommentForm(request.POST, request.FILES)
+
 		if comment_form.is_valid():
+			parent_obj = None
+
+			try:
+				reply_id = int(request.POST.get('reply_id'))
+			except:
+				reply_id = None
+
+			if reply_id:
+				parent_obj = Comment.objects.get(id=reply_id)
+				if parent_obj:
+					reply_comment = comment_form.save(commit=False)
+					reply_comment.reply = parent_obj
+
 			new_comment = comment_form.save(commit=False)
 			new_comment.parrent = track
 			new_comment.save()
-			return HttpResponseRedirect(request.path)	
+			return HttpResponseRedirect(request.path)
 	else:
 		comment_form = CommentForm()
 
 
 	dic_obj = {'track' : track,
 			   'tracks' : tracks,
-			   'comment_form' : comment_form}
+			   'comment_form' : comment_form,
+			   'comments' : comments}
 
 	return render(request, 'track/track_detail.html', dic_obj)
 
