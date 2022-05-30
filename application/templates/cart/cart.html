@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>cart</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+	<section class="h-100 h-custom" style="background-color: #eee;">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card shopping-cart" style="border-radius: 15px;">
+          <div class="card-body text-black">
+
+            <div class="row">
+              <div class="col-lg-6 px-5 py-4">
+
+                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Ваши продукты в корзине</h3>
+
+    {% for item in cart %}
+        {% with product=item.product %}
+
+                <div class="d-flex align-items-center mb-5">
+                  <div class="flex-shrink-0">
+                    <img src="{{ product.image.url }}"
+                      class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <a href="{% url 'application:cart_remove' product.id %}" class="float-end text-black"><i class="fas fa-times"></i></a>
+                    <h5 class="text-primary">{{ product.name }}</h5>
+                    <h6 style="color: #9e9e9e;">Color: white</h6>
+                    <div class="d-flex align-items-center">
+                      <p class="fw-bold mb-0 me-5 pe-3">{{ product.price }}$</p>
+                      <div class="def-number-input number-input safari_only">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                          class="minus"></button>
+                        <input class="quantity fw-bold text-black" min="0" name="quantity" value="{{ item.quantity }}"
+                          type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                          class="plus"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        {% endwith %}
+    {% endfor %}
+                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+                <div class="d-flex justify-content-between px-x">
+                  <p class="fw-bold">Скидка:</p>
+                  <p class="fw-bold">0$</p>
+                </div>
+                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                  <h5 class="fw-bold mb-0">Всего цена:</h5>
+                  <h5 class="fw-bold mb-0">{{ cart.get_total_price }} RUB</h5>
+                </div>
+
+              </div>
+              <div class="col-lg-6 px-5 py-4">
+
+                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Оплата</h3>
+                <form method="POST" action="https://yoomoney.ru/quickpay/confirm.xml">
+                  <input type="hidden" name="receiver" value="4100117801954483">
+                  <input type="hidden" name="formcomment" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
+                  <input type="hidden" name="short-dest" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
+                  <input type="hidden" name="label" value="{{ order.id }}">
+                  <input type="hidden" name="quickpay-form" value="donate">
+                  <input type="hidden" name="targets" value="транзакция {{ order.id }}">
+                  <input type="hidden" name="sum" value="{{ cart.get_total_price }}" data-type="number">
+                  <input type="hidden" name="need-fio" value="true">
+                  <input type="hidden" name="need-email" value="true">
+                  <input type="hidden" name="need-phone" value="false">
+                  <input type="hidden" name="need-address" value="false">
+                  <label><input type="radio" name="paymentType" value="PC">ЮMoney</label>
+                  <label><input type="radio" name="paymentType" value="AC">Банковской картой</label>
+                  <button type="button" class="btn btn-primary btn-block btn-lg">
+                    <input type="submit" value="Отправить" style="color:blue;">
+                  </button>
+                </form>
+                  <button type="button" class="btn btn-primary btn-block btn-lg">Buy now</button>
+
+                  <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
+                    <a href="{% url "application:product_list" %}"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
+                  </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

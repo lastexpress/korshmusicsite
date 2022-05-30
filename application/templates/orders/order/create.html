@@ -1,0 +1,415 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Shome - Shoes eCommerce Website Template"/>
+    <meta name="keywords" content="footwear, shoes, modern, shop, store, ecommerce, responsive, e-commerce"/>
+    <meta name="author" content="codecarnival"/>
+
+    <title>Shome - Shoes eCommerce Website Template</title>
+
+    <!--== Favicon ==-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+
+    <!--== Google Fonts ==-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet"> 
+
+    <!--== Bootstrap CSS ==-->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <!--== Font Awesome Min Icon CSS ==-->
+    <link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet" />
+    <!--== Pe7 Stroke Icon CSS ==-->
+    <link href="{% static 'assets/css/pe-icon-7-stroke.css' %}" rel="stylesheet" />
+    <!--== Swiper CSS ==-->
+    <link href="{% static 'assets/css/swiper.min.css' %}" rel="stylesheet" />
+    <!--== Fancybox Min CSS ==-->
+    <link href="{% static 'assets/css/fancybox.min.css' %}" rel="stylesheet" />
+    <!--== Aos Min CSS ==-->
+    <link href="{% static 'assets/css/aos.min.css' %}" rel="stylesheet" />
+
+    <!--== Main Style CSS ==-->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="bg-light">
+	<!--== Start Header Wrapper ==-->
+  <header class="main-header-wrapper position-relative">
+    <div class="header-top">
+      <div class="container pt--0 pb--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="header-top-align">
+              <div class="header-top-align-start">
+                <div class="desc">
+                  <p>ТОП МАГАЗ ОТ КОРШУНОВА</p>
+                </div>
+              </div>
+              {% if request.user.is_authenticated %}
+              <div class="header-top-align-end">
+                <div class="header-info-items">
+                  <div class="info-items">
+                    <ul>
+                      <li class="number"><i class="fa fa-phone"></i><a href="tel://0123456789">+12 123 456 789</a></li>
+                      <li class="email"><i class="fa fa-envelope"></i><a href="mailto://demo@example.com">Korsh666@gmail.com</a></li>
+                      <li class="has-submenu"><i class="fa fa-user"></i><a href="#/"><span>{{ user }}</span></a>
+                        <ul class="submenu-nav">
+                          <li><a href="{% url 'application:profile' %}"><span>Личный профиль</span></a></li>
+                          <li><a href="{% url 'application:logout' %}"><span>Выйти</span></a></li>
+                        </ul>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+              <div class="header-top-align-end">
+                <div class="header-info-items">
+                  <div class="info-items">
+                    <ul>
+                      <li class="number"><i class="fa fa-phone"></i><a href="tel://0123456789">+12 123 456 789</a></li>
+                      <li class="email"><i class="fa fa-envelope"></i><a href="mailto://demo@example.com">Korsh666@gmail.com</a></li>
+                      <li class="has-submenu"><i class="fa fa-user"></i><a href="{% url 'application:login' %}"><span>Войти в аккаунт </span></a>
+                        
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-middle">
+      <div class="container pt--0 pb--0">
+        <div class="row align-items-center">
+          <div class="col-12">
+            <div class="header-middle-align">
+              <div class="header-middle-align-start">
+                <div class="header-logo-area">
+                  <a href="{% url 'application:home' %}">
+                    <h1>ОБРАТНО В МУЗЫКУ</h1>
+                  </a>
+                </div>
+              </div>
+              <div class="header-middle-align-center">
+                <div class="header-search-area">
+                  <form class="header-searchbox">
+                    <input type="search" class="form-control" placeholder="Search">
+                    <button class="btn-submit" type="submit"><i class="pe-7s-search"></i></button>
+                  </form>
+                </div>
+              </div>
+              <div class="header-middle-align-end">
+                <div class="header-action-area">
+                  <div class="shopping-search">
+                    <button class="shopping-search-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#AsideOffcanvasSearch" aria-controls="AsideOffcanvasSearch"><i class="pe-7s-search icon"></i></button>
+                  </div>
+                  <div class="shopping-wishlist">
+                    <a class="shopping-wishlist-btn" href="shop-wishlist.html">
+                      <i class="pe-7s-like icon"></i>
+                    </a>
+                  </div>
+                  <div class="shopping-cart">
+                    <button class="shopping-cart-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#AsideOffcanvasCart" aria-controls="offcanvasRightLabel">
+                      <i class="pe-7s-shopbag icon"></i>
+                      <sup class="shop-count">02</sup>
+                    </button>
+                  </div>
+                  <button class="btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
+                    <i class="pe-7s-menu"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-area header-default">
+      <div class="container">
+        <div class="row no-gutter align-items-center position-relative">
+          <div class="col-12">
+            <div class="header-align">
+              <div class="header-navigation-area position-relative">
+                <ul class="main-menu nav">
+                  <li class="has-submenu"><a href="{% url 'application:product_list' %}"><span>Главная</span></a>
+                    
+                  </li>
+                  <li><a href="about-us.html"><span>About</span></a></li>
+                  <li class="has-submenu"><a href="#/"><span>Категории</span></a>
+                    <ul class="submenu-nav">
+                      {% for cat_name in categories %}
+                        <li><a href="{{ cat_name.get_absolute_url }}"><span>{{ cat_name.name }}</span></a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  <li><a href="contact.html"><span>Contact</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!--== End Header Wrapper ==-->
+
+
+
+<div class="container" style="padding:0px;">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="{% static 'img/cos.jpg' %}" alt="" width="200" height="57">
+      <h2>Проверьте заказ</h2>
+      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Ваша корзина</span>
+          <span class="badge bg-primary rounded-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+        	{% for item in cart %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">{{ item.product.name }}</h6>
+              <small class="text-muted">Количество: {{ item.quantity }}</small>
+            </div>
+            <span class="text-muted">{{ item.total_price }} RUB</span>
+          </li>
+          {% endfor %}
+          
+          
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Promo code</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span class="text-success">−$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Итого (RUB)</span>
+            <strong>{{ cart.get_total_price }} RUB</strong>
+          </li>
+        </ul>
+
+        <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <button type="submit" class="btn btn-secondary">Redeem</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Billing address</h4>
+        <form action="" method="post" class="order-form">
+        	{% csrf_token %}
+        	{{ form.as_p }}
+        	<input type="submit" value="Отправить">
+        </form>
+      </div>
+    </div>
+  </main>
+
+
+  {% for item in cart %}
+          {% with product=item.product %}
+
+  <!--== Start Aside Cart Menu ==-->
+  <div class="aside-cart-wrapper offcanvas offcanvas-end" tabindex="-1" id="AsideOffcanvasCart" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h1 id="offcanvasRightLabel"></h1>
+      <a href="{% url 'application:cart_detail' %}">
+        <button class="btn-aside-cart-close" data-bs-dismiss="offcanvas" aria-label="Close">КОРЗИНА <i class="fa fa-chevron-right"></i></button>
+      </a>
+    </div>
+    <div class="offcanvas-body">
+        {% for i in cart %}
+        {% with product=i.product %}
+      <ul class="aside-cart-product-list">
+        <li class="product-list-item">
+          <a href="{% url 'application:cart_remove' product.id %}" class="remove">×</a>
+          <a href="{{ product.get_absolute_url }}">
+            <img src="{{ product.image.url }}" width="90" height="110" alt="Image-HasTech">
+            <span class="product-title">{{ product.name }}</span>
+          </a>
+          <span class="product-price">{{ product.price }}RUB</span>
+        </li>
+      </ul>
+      {% endwith %}
+        {% endfor %}
+      
+      <p class="cart-total"><span>Итого:</span><span class="amount">{{ cart.get_total_price }} RUB</span></p>
+      <a class="btn-theme" data-margin-bottom="10" href="{% url 'application:cart_detail' %}">Смотреть корзину</a>
+      <a class="btn-theme" href="{% url 'application:order_create' %}">Купить</a>
+      <a class="d-block text-end lh-1" href="shop-checkout.html"><img src="{% static 'assets/img/photos/paypal.webp' %}" width="133" height="26" alt="Has-image"></a>
+    </div>
+  </div>
+    {% endwith %}
+  {% endfor %}
+  <!--== End Aside Cart Menu ==-->
+
+  <!--== Start Aside Search Menu ==-->
+  <aside class="aside-search-box-wrapper offcanvas offcanvas-top" tabindex="-1" id="AsideOffcanvasSearch" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas-header">
+      <h5 class="d-none" id="offcanvasTopLabel">Aside Search</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i class="pe-7s-close"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="container pt--0 pb--0">
+        <div class="search-box-form-wrap">
+          <div class="search-note">
+            <p>Start typing and press Enter to search</p>
+          </div>
+          <form action="#" method="post">
+            <div class="search-form position-relative">
+              <label for="search-input" class="visually-hidden">Search</label>
+              <input id="search-input" type="search" class="form-control" placeholder="Search entire store…">
+              <button class="search-button"><i class="fa fa-search"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!--== End Aside Search Menu ==-->
+
+  <!--== Start Side Menu ==-->
+  <div class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h1 id="offcanvasExampleLabel"></h1>
+      <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i class="fa fa-chevron-left"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="info-items">
+        <ul>
+          <li class="number"><a href="tel://0123456789"><i class="fa fa-phone"></i>+00 123 456 789</a></li>
+          <li class="email"><a href="mailto://demo@example.com"><i class="fa fa-envelope"></i>demo@example.com</a></li>
+          <li class="account"><a href="account-login.html"><i class="fa fa-user"></i>Account</a></li>
+        </ul>
+      </div>
+      <!-- Mobile Menu Start -->
+      <div class="mobile-menu-items">
+        <ul class="nav-menu">
+          <li><a href="#">Home</a>
+            <ul class="sub-menu">
+              <li><a href="index.html">Home One</a></li>
+              <li><a href="index-two.html">Home Two</a></li>
+            </ul>
+          </li>
+          <li><a href="about-us.html">About</a></li>
+          <li><a href="#">Pages</a>
+            <ul class="sub-menu">
+              <li><a href="account.html">Account</a></li>
+              <li><a href="account-login.html">Login</a></li>
+              <li><a href="account-register.html">Register</a></li>
+              <li><a href="page-not-found.html">Page Not Found</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Shop</a>
+            <ul class="sub-menu">
+              <li><a href="#">Shop Layout</a>
+                <ul class="sub-menu">
+                  <li><a href="shop-three-columns.html">Shop 3 Column</a></li>
+                  <li><a href="shop-four-columns.html">Shop 4 Column</a></li>
+                  <li><a href="shop.html">Shop Left Sidebar</a></li>
+                  <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Single Product</a>
+                <ul class="sub-menu">
+                  <li><a href="single-normal-product.html">Single Product Normal</a></li>
+                  <li><a href="single-product.html">Single Product Variable</a></li>
+                  <li><a href="single-group-product.html">Single Product Group</a></li>
+                  <li><a href="single-affiliate-product.html">Single Product Affiliate</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Others Pages</a>
+                <ul class="sub-menu">
+                  <li><a href="shop-cart.html">Shopping Cart</a></li>
+                  <li><a href="shop-checkout.html">Checkout</a></li>
+                  <li><a href="shop-wishlist.html">Wishlist</a></li>
+                  <li><a href="shop-compare.html">Compare</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">Blog</a>
+            <ul class="sub-menu">
+              <li><a href="#">Blog Layout</a>
+                <ul class="sub-menu">
+                  <li><a href="blog.html">Blog Grid</a></li>
+                  <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                  <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Single Blog</a>
+                <ul class="sub-menu">
+                  <li><a href="blog-details-no-sidebar.html">Blog Details</a></li>
+                  <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                  <li><a href="blog-details.html">Blog Details Right Sidebar</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Mobile Menu End -->
+    </div>
+  </div>
+  <!--== End Side Menu ==-->
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">© 2017–2021 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+
+
+
+
+<!--=== jQuery Modernizr Min Js ===-->
+<script src="{% static 'assets/js/modernizr.js' %}"></script>
+<!--=== jQuery Min Js ===-->
+<script src="{% static 'assets/js/jquery-main.js' %}"></script>
+<!--=== jQuery Migration Min Js ===-->
+<script src="{% static 'assets/js/jquery-migrate.js' %}"></script>
+<!--=== jQuery Popper Min Js ===-->
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<!--=== jQuery Bootstrap Min Js ===-->
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<!--=== jQuery Ui Min Js ===-->
+<script src="{% static 'assets/js/jquery-ui.min.js' %}"></script>
+<!--=== jQuery Swiper Min Js ===-->
+<script src="{% static 'assets/js/swiper.min.js' %}"></script>
+<!--=== jQuery Fancybox Min Js ===-->
+<script src="{% static 'assets/js/fancybox.min.js' %}"></script>
+<!--=== jQuery Waypoint Js ===-->
+<script src="{% static 'assets/js/waypoint.js' %}"></script>
+<!--=== jQuery Parallax Min Js ===-->
+<script src="{% static 'assets/js/parallax.min.js' %}"></script>
+<!--=== jQuery Aos Min Js ===-->
+<script src="{% static 'assets/js/aos.min.js' %}"></script>
+
+<!--=== jQuery Custom Js ===-->
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+</html>

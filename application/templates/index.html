@@ -28,8 +28,43 @@
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-
+        {% if request.user.is_authenticated %}
+    
     <div class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <h1 href="#"><a href="/">Музыкальная станция</a></h1>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            
+                            <li><a href="{% url 'application:home' %}">Главная</a></li>
+                            <li><a href="{% url 'application:genre' %}">Жанры</a></li>
+                            <li><a href="{% url 'application:product_list' %}">SHOP</a></li>
+                            <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
+                            <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
+                            <div class="dropdown">
+                                <button class="dropbtn">{{ user }}</button>
+                                <div class="dropdown-content">
+                                <li>
+                                    Hello {{ user }}
+                                </li>
+                                    <a href="{% url "application:profile" %}">Личный профиль</a>
+                                    <a href="{% url "application:logout" %}?next=/">Выйти</a>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% else %}
+        <div class="footer-area">
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
                 <div class="col-12 col-md-6">
@@ -41,9 +76,17 @@
                         <ul>
                             <li><a href="{% url 'application:home' %}">Главная</a></li>
                             <li><a href="{% url 'application:genre' %}">Жанры</a></li>
-                            <li><a href="#">Events</a></li>
+                            <li><a href="{% url 'application:product_list' %}">SHOP</a></li>
                             <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
                             <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
+                            <div class="dropdown">
+                                <button class="dropbtn">Регистрация</button>
+                                <div class="dropdown-content">
+                                  <a href="{% url 'application:register' %}">Регистрация</a>
+                                  <a href="{% url 'application:login' %}">Войти</a>
+                                  
+                                </div>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -51,12 +94,17 @@
         </div>
     </div>
 
-	
+{% endif %}
 
-  
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid" style='justify-content: right; display: flex;'>
+            <form class="d-flex" action="{% url 'application:search' %}" method="get">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 
-
-  
   <!-- ##### Latest Albums Area Start ##### -->
     <section class="latest-albums-area">
         <div class="container">
@@ -317,6 +365,7 @@
 
     <script src="{% static 'js/active.js' %}"></script>
 
+
     <script>
       $('.owl-carousel').owlCarousel({
         loop:true,
@@ -336,5 +385,7 @@
           }
       })
     </script>
+
+
 </body>
 </html>

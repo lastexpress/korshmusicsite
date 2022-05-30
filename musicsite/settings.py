@@ -28,6 +28,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'application:home'
+
+CART_SESSION_ID = 'cart'
+
+STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51KsyMHLeY0X3ppSx2Ck7JDmvntM5LnD52iLBHzip3UXRb3CSvkbl05q8ek8hilax6A6UCuwJUqQt5qeKsa65ubkE00F6iZivMs'
+STRIPE_API_KEY_HIDDEN = 'sk_test_51KsyMHLeY0X3ppSxT8iuCp2rfYogRJo1z8IiqkjfvnJ7HMmLMHcpWnR2zXllCtoFQk6uw3XbP956XOjAJQtuIbdW00qnN4aeRf'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
 
@@ -42,7 +51,19 @@ INSTALLED_APPS = [
     'application.apps.ApplicationConfig',
     'blog.apps.BlogConfig',
     'phonenumber_field',
+    'crispy_forms',
+    'account',
+    'shop.apps.ShopConfig',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    'paypal.standard.ipn',
 ]
+
+PAYPAL_TEST = True
+
+PAYPAL_RECEIVER_EMAIL = 'sb-drumk16186345@business.example.com'
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -110,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
