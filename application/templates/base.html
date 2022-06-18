@@ -1,31 +1,35 @@
 {% load static %}
-{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
-
-    <title>Stand CSS Blog by TemplateMo</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
-    <link rel="stylesheet" href="{% static 'css/templatemo-stand-blog.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.css' %}">
-
-  </head>
+   ym(87717780, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87717780" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
 <body>
-
-    {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
+    
     <div class="footer-area">
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
@@ -39,7 +43,7 @@
                             
                             <li><a href="{% url 'application:home' %}">Главная</a></li>
                             <li><a href="{% url 'application:genre' %}">Жанры</a></li>
-                            <li><a href="{% url 'application:product_list' %}">Магазин</a></li>
+                            <li><a href="{% url 'application:product_list' %}">SHOP</a></li>
                             <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
                             <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
                             <div class="dropdown">
@@ -92,27 +96,12 @@
 
 {% endif %}
 
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid" style='justify-content: right; display: flex;'>
-            <form class="d-flex" action="{% url 'application:search' %}" method="get">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-
-
-
-    
-		{% block blog_all_post %}
-		
-		{% endblock %}
 
 
 
 
 
-    <!-- ##### Footer Area Start ##### -->
+ <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
@@ -152,27 +141,38 @@
 
 
 
-    <!-- Bootstrap core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-    <!-- Additional Scripts -->
-    <script src="{% static 'js/blog/custom.js' %}"></script>
-    <script src="{% static 'js/blog/owl.js' %}"></script>
-    <script src="{% static 'js/blog/slick.js' %}"></script>
-    <script src="{% static 'js/blog/isotope.js' %}"></script>
-    <script src="{% static 'js/blog/accordions.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
-    <script language = "text/Javascript"> 
-      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-      function clearField(t){                   //declaring the array outside of the
-      if(! cleared[t.id]){                      // function makes it static and global
-          cleared[t.id] = 1;  // you could use true and false, but that's more typing
-          t.value='';         // with more chance of typos
-          t.style.color='#fff';
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+
+    <script src="{% static 'js/active.js' %}"></script>
+
+
+    <script>
+      $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:15,
+        nav:false,
+        autoplay:true,
+          responsive:{
+            0:{
+              items:1
+            },
+            600:{
+              items:2
+            },
+            1000:{
+              items:3
+            }
           }
-      }
+      })
     </script>
+
 
 </body>
 </html>

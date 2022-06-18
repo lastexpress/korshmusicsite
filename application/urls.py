@@ -12,6 +12,7 @@ urlpatterns = [
     path('', views.IndexView, name='home'),
     
     path('search/', views.Search.as_view(), name='search'),
+    path('shop_search/', views.SearchShop.as_view(), name='shop_search'),
     path('music/genre/', views.GenreView, name='genre'),
     path('music/genre/<str:gen>/', views.genre_detail, name='genre_detail'),
     path('music/artist/<str:author>/', views.artist_detail, name='artist_detail'),

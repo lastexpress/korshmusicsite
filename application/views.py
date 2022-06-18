@@ -192,6 +192,25 @@ class Search(ListView):
 		return context
 
 
+class SearchShop(ListView):
+	"""Поиск на сайте в магазине"""
+	template_name = 'search/shop_search.html'
+
+	paginate_by = 12
+
+	def get_queryset(self):
+		query_set = []
+		query_set.append(Product.objects.filter(name__icontains=self.request.GET.get("q")))
+
+		final_set = list(chain(*query_set))
+		return final_set
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context["q"] = f'q={self.request.GET.get("q")}&'
+		return context
+
+
 def product_list(request, category_slug=None):
 	cart = Cart(request)
 	category = None
