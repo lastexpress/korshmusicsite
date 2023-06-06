@@ -82,7 +82,9 @@ ROOT_URLCONF = 'musicsite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'application/templates/'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

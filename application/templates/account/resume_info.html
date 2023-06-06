@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+	{% if request.new_user.is_authenticated %}
+    <div class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <h1 href="#"><a href="/">Музыкальная станция</a></h1>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            
+                            <li><a href="{% url 'application:home' %}">Главная</a></li>
+                            <li><a href="{% url 'application:genre' %}">Жанры</a></li>
+                            <li><a href="{% url 'application:product_list' %}">Магазин</a></li>
+                            <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
+                            <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
+                            <div class="dropdown">
+                                <button class="dropbtn">{{ new_user }}</button>
+                                <div class="dropdown-content">
+                                <li>
+                                    Hello {{ new_user }}
+                                </li>
+                                    <a href="{% url "application:profile" %}">Личный профиль</a>
+                                    <a href="{% url "application:logout" %}?next=/">Выйти</a>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {% else %}
+        <div class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <h1 href="#"><a href="/">Музыкальная станция</a></h1>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="{% url 'application:home' %}">Главная</a></li>
+                            <li><a href="{% url 'application:genre' %}">Жанры</a></li>
+                            <li><a href="{% url 'application:blog_list' %}">Блог</a></li>
+                            <li><a href="{% url 'application:contact_page' %}">Контакты</a></li>
+                            <li><a href="{% url 'application:resume_info' %}">РЕЗЮМЕ</a></li>
+                            <div class="dropdown">
+                                <button class="dropbtn">Регистрация</button>
+                                <div class="dropdown-content">
+                                  <a href="{% url 'application:register' %}">Регистрация</a>
+                                  <a href="{% url 'application:login' %}">Войти</a>
+                                  
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid" style='justify-content: right; display: flex;'>
+            <form class="d-flex" action="{% url 'application:search' %}" method="get">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="resume-container">
+        <div class="resume-container-col">
+            <div class="resume-row">
+                <div class="resume-main-img">
+                    <img src="{% static 'img/me.jpg' %}" alt="">
+                </div>
+                <div class="resume-main-title">
+                    <div class="resume-title">
+                        <h1>Коршунов Георгий Владимирович</h1>
+                    </div>
+                    <div class="resume-info-work">
+                        <p><span class="resume-span">Разработчик ПО</span></p>
+                        <p>Желаемая зарплата: <span class="resume-span">300к месяц.</span></p>
+                    </div>
+                    <div class="resume-info-work">
+                        <p>Электронная почта: <span class="resume-span">korshnescafe@gmail.com</span></p>
+                        <p>Телефон: <span class="resume-span">+8 (977) 049-32-34</span></p>
+                    </div>
+                    <div class="resume-info-work">
+                        <p>Занятость: <span class="resume-span">Полная.</span></p>
+                        <p>График работы: <span class="resume-span">Полный день.</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="resume-row2">
+                <div class="resume-row2-title">
+                    <p>Личная информация</p>
+                </div>
+                <div class="resume-row2-info">
+                    <p>Город проживания: <span class="resume-span">Удмуртия, Глазов.</span></p>
+                    <p>Переезд: <span class="resume-span">Невозможен.</span></p>
+                    <p>Гражданство: <span class="resume-span">Россия.</span></p>
+                    <p>Дата рождения: <span class="resume-span">15.12.2001 (21 год).</span></p>
+                    <p>Пол: <span class="resume-span">Мужской.</span></p>
+                    <p>Семейное положение: <span class="resume-span">Холост.</span></p>
+                    <p>Есть дети: <span class="resume-span">нет.</span></p>
+                </div>
+                <div class="personal-icon">
+                    <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="resume-row3">
+                <div class="resume-row2-title">
+                    <p>Образование</p>
+                </div>
+                <div class="resume-row2-info">
+                    <p>Учебное заведение: <span class="resume-span">Глазовский инженерно-экономический институт
+                        (филиал) ФГБОУ ВО «ИжГТУ имени М.Т. Калашникова.»</span></p>
+                    <p>Год оконочания: <span class="resume-span">2022.</span></p>
+                    <p>Факультет: <span class="resume-span">Информационные системы (по отраслям).</span></p>
+                    <p>Специальность: <span class="resume-span">Техник-программист.</span></p>
+                    <p>Форма обучения: <span class="resume-span">Очная.</span></p>
+                </div>
+                <div class="personal-icon">
+                    <i class="fa fa-school fa-2x"></i>
+                </div>
+                <div class="clear-line"></div>
+                <div class="resume-row2-info">
+                    <p>Учебное заведение: <span class="resume-span">Федеральное государственное бюджетное образовательное учреждение высшего образования
+                        Глазовский государственный педагогический институт имени В. Г. Короленко.</span></p>
+                    <p>Год оконочания: <span class="resume-span">2026.</span></p>
+                    <p>Факультет: <span class="resume-span">информатики, физики и математики.</span></p>
+                    <p>Специальность: <span class="resume-span">информатика и вычислительная техника, бакалавриат. 09.03.01.</span></p>
+                    <p>Форма обучения: <span class="resume-span">Очная.</span></p>
+                </div>
+            </div>
+            <div class="resume-row4">
+                <div class="resume-row2-title">
+                    <p>Опыт работы</p>
+                </div>
+                <div class="resume-row2-info">
+                    <p>Опыт работы: нет</p>
+                    <p>Практика: <span class="resume-span">АО «Гринатом». <br>Практическое пособие в бюджетном учреждение здравоохранения Удмуртской Республики
+                    "ГЛАЗОВСКАЯ МЕЖРАЙОННАЯ БОЛЬНИЦА
+                    Министерства здравоохранения Удмуртской Республики".</span></p>
+                    <p>Период работы: <span class="resume-span">01.06.2021 - 14.06.2021. <br> 01.12.2021-20.12.2022.</span></p>
+                    <p>Должностные обязанности и достижения: <span class="resume-span"><br>Обязанности: <br>- Обслуживание производственной техники. <br>- Создание парсера погоды для webSite. <br> - Обслуживание и администрирование webSite на CMS bitrix. <br>
+                        - Занесение регистрации сотрудников в электронную базу данных(РТ МИС).<br> - Работа с базой данных в локальной сети.<br><br>Достижения:<br> - Создание e-commerce webSite (Продажа любого товаров в сети).<br> - Полностью разбор-сбор техники apple iPhone. <br> - Полный разбор-сбор ПК.</span></p>
+                </div>
+                <div class="personal-icon">
+                    <i class="fa-solid fa-briefcase fa-2x"></i>
+                </div>
+            </div>
+            <div class="resume-row5">
+                <div class="resume-row2-info">
+                    <p>Языки: <span class="resume-span">Английский</span></p>
+                    <p>Дополнительная информация: <span class="resume-span"><br> - Языки программирования: BASIC, C++, SQL, PYTHON, JAVASCRIPT. <br> - Техническое и программное обеспечение. <br> - HTML. <br> - CSS. <br> - JS, Python, C++. <br> - PuTTY, Figma, Photoshop, ubuntu 20.04 LTS.</BR></span></p>
+                </div>
+            </div>
+            <div class="resume-row">
+                
+            </div>
+            <div class="resume-row">
+                
+            </div>
+        </div>
+    </div>
+
+    <script src"{% static 'js/bthDay.js' %}"></script>
+
+</body>
+</html>

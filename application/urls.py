@@ -10,7 +10,7 @@ app_name = 'application'
 
 urlpatterns = [
     path('', views.IndexView, name='home'),
-    
+    path('resume/', views.resume_info, name='resume_info'),
     path('search/', views.Search.as_view(), name='search'),
     path('shop_search/', views.SearchShop.as_view(), name='shop_search'),
     path('music/genre/', views.GenreView, name='genre'),

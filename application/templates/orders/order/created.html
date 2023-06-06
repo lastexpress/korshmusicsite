@@ -50,20 +50,39 @@
             <div class="header-top-align">
               <div class="header-top-align-start">
                 <div class="desc">
-                  <p>ТОП МАГАЗ ОТ КОРШУНОВА</p>
+                  <p>ТОП МАГАЗ ОТ КОРШУНОВА1</p>
                 </div>
               </div>
+              {% if request.user.is_authenticated %}
               <div class="header-top-align-end">
                 <div class="header-info-items">
                   <div class="info-items">
                     <ul>
-                      <li class="number"><i class="fa fa-phone"></i><a href="tel://0123456789">+00 123 456 789</a></li>
-                      <li class="email"><i class="fa fa-envelope"></i><a href="mailto://demo@example.com">demo@example.com</a></li>
-                      <li class="account"><i class="fa fa-user"></i><a href="account-login.html">Account</a></li>
+                      <li class="number"><i class="fa fa-phone"></i><a href="tel://0123456789">+12 123 456 789</a></li>
+                      <li class="email"><i class="fa fa-envelope"></i><a href="mailto://demo@example.com">Korsh666@gmail.com</a></li>
+                      <li class="has-submenu"><i class="fa fa-user"></i><a href="#/"><span>{{ user }}</span></a>
+                        <ul class="submenu-nav">
+                          <li><a href="{% url 'application:profile' %}"><span>Личный профиль</span></a></li>
+                          <li><a href="{% url 'application:logout' %}"><span>Выйти</span></a></li>
+                        </ul>
                     </ul>
                   </div>
                 </div>
               </div>
+              {% else %}
+              <div class="header-top-align-end">
+                <div class="header-info-items">
+                  <div class="info-items">
+                    <ul>
+                      <li class="number"><i class="fa fa-phone"></i><a href="tel://0123456789">+12 123 456 789</a></li>
+                      <li class="email"><i class="fa fa-envelope"></i><a href="mailto://demo@example.com">Korsh666@gmail.com</a></li>
+                      <li class="has-submenu"><i class="fa fa-user"></i><a href="{% url 'application:login' %}"><span>Войти в аккаунт</span></a>
+                        
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -83,8 +102,8 @@
               </div>
               <div class="header-middle-align-center">
                 <div class="header-search-area">
-                  <form class="header-searchbox">
-                    <input type="search" class="form-control" placeholder="Search">
+                  <form class="header-searchbox" action="{% url 'application:shop_search' %}" method="get">
+                    <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="q">
                     <button class="btn-submit" type="submit"><i class="pe-7s-search"></i></button>
                   </form>
                 </div>

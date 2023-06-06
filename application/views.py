@@ -29,6 +29,12 @@ from orders.models import Order, OrderItem
 from orders.forms import OrderCreateForm
 
 
+def resume_info(request):
+
+	dic_obj = {}
+
+	return render(request, 'account/resume_info.html', dic_obj)
+
 # class register(View):
 # 	template_name = 'account/register.html'
 
